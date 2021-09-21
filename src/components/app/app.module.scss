@@ -1,0 +1,17 @@
+@import "../../style/color.scss";
+
+html, body {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  text-align: center;
+  background-color: $primary-color-light;
+}
+
+.app__container {
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: auto;
+}
