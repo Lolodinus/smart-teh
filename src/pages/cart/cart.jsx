@@ -13,7 +13,12 @@ export const Cart = () => {
         dispatch(cartActions.deleteProductFromCart(id))
     }
 
-    const cartItems = cartProducts.map(({ id, title, price, img }) => {
+    const addProductToCart = (product) => {
+        dispatch(cartActions.addProductToCart(product));
+    }
+
+    const cartItems = cartProducts.map((product) => {
+        const { id, title, price, img, quantity } = product;
         return (
             <li 
                 className={ style.cart__item }
@@ -32,6 +37,21 @@ export const Cart = () => {
                 <div className={ style["cart__item-right"] }>
                     <div className={ style["cart__item-price"] }>
                         { price } руб.
+                    </div>
+                    <div className={ style["cart__item-quantity"] }>
+                        <button 
+                            className={ style["cart__item-remove"] }
+                            onClick={() => deleteProductFromCart(id)}
+                        >
+                            -
+                        </button>
+                        <input type="text" value={ quantity } />
+                        <button 
+                            className={ style["cart__item-add"] }
+                            onClick={() => addProductToCart(product)}
+                        >
+                            +
+                        </button>
                     </div>
                 </div>
                 <button 
