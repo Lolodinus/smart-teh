@@ -3,6 +3,7 @@ import { cartActionTypes } from "./actions";
 const initialState = {
     cartProducts: [],
     cartProductsCount: null,
+    totalPrice: 0,
 }
 
 export const cartReducer = (state = initialState, action) => {
@@ -34,6 +35,7 @@ export const cartReducer = (state = initialState, action) => {
                         ...state.cartProducts.slice(matchProductId + 1)
                     ],
                     cartProductsCount: state.cartProductsCount + 1,
+                    totalPrice: state.totalPrice + price,
                 };
             }
             
@@ -44,6 +46,7 @@ export const cartReducer = (state = initialState, action) => {
                     newItem
                 ],
                 cartProductsCount: state.cartProductsCount + 1,
+                totalPrice: state.totalPrice + price,
             };
         case cartActionTypes.DELETE_PRODUCT_FROM_CART:
             const idx = action.payload;
@@ -52,7 +55,7 @@ export const cartReducer = (state = initialState, action) => {
             if (state.cartProducts[productIndex].quantity > 1) {
                 const newItem = {
                     ...state.cartProducts[productIndex],
-                    quantity: state.cartProducts[productIndex].quantity - 1
+                    quantity: state.cartProducts[productIndex].quantity - 1,
                 }
 
                 return {
@@ -63,6 +66,7 @@ export const cartReducer = (state = initialState, action) => {
                         ...state.cartProducts.slice(productIndex + 1),
                     ],
                     cartProductsCount: state.cartProductsCount - 1,
+                    totalPrice: state.totalPrice - state.cartProducts[productIndex].price
                 }
             }
 
@@ -73,6 +77,7 @@ export const cartReducer = (state = initialState, action) => {
                     ...state.cartProducts.slice(productIndex + 1),
                 ],
                 cartProductsCount: state.cartProductsCount - 1,
+                totalPrice: state.totalPrice - state.cartProducts[productIndex].price
             };
         case cartActionTypes.COUNT_OF_PRODUCTS:
             const count = state.cartProducts.length;

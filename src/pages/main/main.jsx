@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { productsActions } from "../../store/products";
-import { cartActions } from "../../store/cart"
+import { cartActions } from "../../store/cart";
+import { priceFormat } from "../../utils";
 
 import style from "./main.module.scss";
 
@@ -10,8 +11,7 @@ export const Main = () => {
     const dispatch = useDispatch();
     const { products, loading } = useSelector((store) => store.products);
 
-    const addProductToCart = (id, title, price, img) => {
-        const product = { id, title, price, img }
+    const addProductToCart = (product) => {
         dispatch(cartActions.addProductToCart(product));
     }
 
@@ -19,7 +19,8 @@ export const Main = () => {
         dispatch(productsActions.fetchProducts())
     }, []);
 
-    const items = products.map(({ id, title, price, img }) => {
+    const items = products.map((item) => {
+        const { id, title, price, img } = item;
         return (
             <li 
                 key={ id } 
@@ -35,10 +36,10 @@ export const Main = () => {
                         </a>
                     </div>
                     <div className={style.info__bottom}>
-                        <div className={style.info__price}>{ price } руб.</div>
+                        <div className={style.info__price}>{ priceFormat(price) } руб.</div>
                         <button 
                             className={style["info__add-to-cart"]}
-                            onClick={() => addProductToCart(id, title, price, img)}
+                            onClick={() => addProductToCart(item)}
                         >
                             В корзину
                         </button>

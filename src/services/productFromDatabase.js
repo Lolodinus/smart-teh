@@ -16,16 +16,9 @@ export class ProductService {
         return products.map(product => ({
             "id": product.id,
             "title": product.title,
-            "price": this.priceFormat(product.price),
+            "price": product.price,
             "img": product.img,
         }))
-    }
-
-    priceFormat(price) {
-        const oldPrice = price.toString();
-        const separator = " ";
-        const newPrice = oldPrice.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
-        return newPrice;
     }
 
     async getProducts() {
