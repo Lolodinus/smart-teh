@@ -22,6 +22,7 @@ export const Header = () => {
             <div className={ style.header__container }>
                 <div className={ style.header__row }>
                     <Link className={ style.header__logo } to={ pageLinks.main }>
+                        <span className={ style["header__logo-icon"] }></span>
                         <h1>
                             Smart Teh
                         </h1>

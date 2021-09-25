@@ -28,9 +28,12 @@ export const Main = () => {
                 key={ id } 
                 className={style.main__item}
             >
-                <div className={style["main__item-img"]}>
+                <Link
+                    to= { `${ pageLinks.productDetail}/${id}` }
+                    className={ style["main__item-img"] }
+                >
                     <img src={ img } alt={ title } />
-                </div>
+                </Link>
                 <div className={`${style["main__item-info"]} ${style["info"]}`}>
                     <div className={style.info__title}>
                         <Link

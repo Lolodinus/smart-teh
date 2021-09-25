@@ -27,9 +27,27 @@ export const ProductDetail = () => {
         dispatch(cartActions.addProductToCart(product));
     }
 
-    const renderItem = () => {
-        const {title, price, img, category} = selectedProduct;
+    const renderDiscription = (description) => {
+        if (description && description !== "") {
+            return Object.keys(description).map(key => (
+                <li 
+                    className={ style["product-detail__discription-item"] }
+                    key={ key }
+                >
+                    <div className={ style["product-detail__discription-item-key"] }>
+                        {key}
+                    </div>
+                    <div className={ style["product-detail__discription-item-value"] }>
+                        { description[key] }
+                    </div>
+                </li>
+            ))
+        }
+    }
 
+    const renderItem = () => {
+        const {title, price, img, description} = selectedProduct;
+        const productDiscription = renderDiscription(description);
         return (
             <div className={ style["product-detail"] }>
                 <div className={ style["product-detail__left"] }>
@@ -43,38 +61,7 @@ export const ProductDetail = () => {
                             { title }
                         </h2>
                         <ul className={ style["product-detail__discription-list"] }>
-                            <li className={ style["product-detail__discription-item"] }>
-                                <div className={ style["product-detail__discription-item-key"] }>
-                                    Категория
-                                </div>
-                                <div className={ style["product-detail__discription-item-value"] }>
-                                    { category }
-                                </div>
-                            </li>
-                            <li className={ style["product-detail__discription-item"] }>
-                                <div className={ style["product-detail__discription-item-key"] }>
-                                    Категория
-                                </div>
-                                <div className={ style["product-detail__discription-item-value"] }>
-                                    { category }
-                                </div>
-                            </li>
-                            <li className={ style["product-detail__discription-item"] }>
-                                <div className={ style["product-detail__discription-item-key"] }>
-                                    Категория
-                                </div>
-                                <div className={ style["product-detail__discription-item-value"] }>
-                                    { category }
-                                </div>
-                            </li>
-                            <li className={ style["product-detail__discription-item"] }>
-                                <div className={ style["product-detail__discription-item-key"] }>
-                                    Категория
-                                </div>
-                                <div className={ style["product-detail__discription-item-value"] }>
-                                    { category }
-                                </div>
-                            </li>
+                            { productDiscription }
                         </ul>
                         <div className={ style["product-detail__bottom-block"] }>
                             <div className={ style["product-detail__price"] }>

@@ -28,11 +28,22 @@ h1 {
 }
 
 .header__logo {
+    display: flex;
+    align-items: center;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     color: $primary-color-text;
+    span {
+        display: block;
+        height: 40px;
+        width: 40px;
+        background: center / contain no-repeat url("./icon/logo.svg");
+    }
+    h1 {
+        margin-left: 15px;
+    }
 }
 
 .header__cart {

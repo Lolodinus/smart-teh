@@ -19,6 +19,7 @@ export class ProductService {
             "price": product.price,
             "img": product.img,
             "category": product.category,
+            "description": product.description,
         }
     }
 

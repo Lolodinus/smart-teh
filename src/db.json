@@ -5,49 +5,119 @@
             "title": "Смартфон Samsung Galaxy Z Fold3 512GB Black (SM-F926B)",
             "price": 169990,
             "img": "https://img.mvideo.ru/Big/30058455bb.jpg",
-            "category": "phone"
+            "category": "phone",
+            "description": {
+                "Экран": "7.6\"/1768x2208 Пикс",
+                "Процессор": "Qualcomm Snapdragon 888 1 х 2.84ГГц + 3 х 2.41ГГц + 4 х 1.78ГГц",
+                "Оперативная память (RAM)": "12 ГБ",
+                "Встроенная память (ROM)": "512 ГБ",
+                "Основная камера МПикс": "12/12/12/TOF",
+                "Фронтальная камера МПикс": "4",
+                "Технология NFC": "Да",
+                "Поддержка стандартов": "2G/3G/4G LTE"
+            }
         },
         {
             "id": 1,
             "title": "Смартфон Samsung Galaxy S21 Ultra 512GB Phantom Black (SM-G998B)",
             "price": 118999,
             "img": "https://img.mvideo.ru/Big/30054893bb.jpg",
-            "category": "phone"
+            "category": "phone",
+            "description": {
+                "Экран": "6.8\"/3200x1440 Пик",
+                "Процессор": "Samsung Exynos 2100 1 x 2.9 + 3 x 2.8 + 4 x 2.2 ГГц",
+                "Оперативная память (RAM)": "16 ГБ",
+                "Встроенная память (ROM)": "512 ГБ",
+                "Основная камера МПикс": "108/12/10/10/Лазер AF",
+                "Фронтальная камера МПикс": "40",
+                "Технология NFC": "Да",
+                "Поддержка стандартов": "2G/3G/4G LTE/5G"
+            }
         },
         {
             "id": 2,
             "title": "Смартфон Xiaomi Mi 11 256GB Midnight Gray",
             "price": 65990,
             "img": "https://img.mvideo.ru/Big/30056960bb.jpg",
-            "category": "phone"
+            "category": "phone",
+            "description": {
+                "Экран": "6.81\"/1440x3200 Пикс",
+                "Процессор": "Qualcomm Snapdragon 888 1x2.84 + 3x2.42 + 4x1.8 ГГц",
+                "Оперативная память (RAM)": "8 ГБ",
+                "Встроенная память (ROM)": "256 ГБ",
+                "Основная камера МПикс": "108/13/5",
+                "Фронтальная камера МПикс": "20",
+                "Технология NFC": "Да",
+                "Поддержка стандартов": "2G/3G/4G LTE/5G"
+            }
         },
         {
             "id": 3,
             "title": "Смартфон Huawei Mate Xs Interstellar Blue (TAH-N29M)",
             "price": 199990,
             "img": "https://img.mvideo.ru/Big/30048641bb.jpg",
-            "category": "phone"
+            "category": "phone",
+            "description": {
+                "Экран": "6.6\"/2480x1148 Пикс",
+                "Процессор": "Huawei Kirin 990 5G 2x2.86 + 2x2.36 + 4x1.95 ГГц",
+                "Оперативная память (RAM)": "8 ГБ",
+                "Встроенная память (ROM)": "512 ГБ",
+                "Основная камера МПикс": "40/16/8/TOF",
+                "Фронтальная камера МПикс": "нет",
+                "Технология NFC": "Да",
+                "Поддержка стандартов": "2G/3G/4G LTE/5G"
+            }
         },
         {
             "id": 4,
             "title": "Ноутбук Apple MacBook Pro 16 i9 2,4/64/8T/RP 5600M 8Gb Sil",
             "price": 657990,
             "img": "https://img.mvideo.ru/Big/30050792bb.jpg",
-            "category": "laptop"
+            "category": "laptop",
+            "description": {
+                "Диагональ/разрешение": "16\"/3072x1920 пикс.",
+                "Процессор": "Intel Core i9 2.4 ГГц",
+                "Оперативная память (RAM)": "64 ГБ",
+                "Графический контроллер": "Radeon Pro 5600M 8ГБ",
+                "Панель Touch Bar": "Да",
+                "Работа от аккумулятора": "до 11 часов",
+                "Вес": "2 кг",
+                "Серия": "MacBook Pro 16"
+            }
         },
         {
             "id": 5,
             "title": "Ноутбук Huawei MateBook X Pro MACHD-WFE9Q 16+1TB Emerald Green",
             "price": 137999,
             "img": "https://img.mvideo.ru/Big/30058015bb.jpg",
-            "category": "laptop"
+            "category": "laptop",
+            "description": {
+                "Диагональ/разрешение": "13.9\"/3000х2000 пикс.",
+                "Процессор": "Intel Core i7 1165G7 2.8 ГГц",
+                "Оперативная память (RAM)": "16 ГБ",
+                "Графический контроллер": "Intel Iris Graphics",
+                "Объем SSD": "1 ТБ",
+                "Датчик отпечатков пальцев": "Да",
+                "Операционная система": "Windows 10 Домашняя 64",
+                "Работа от аккумулятора": "до 7 часов"
+            }
         },
         {
             "id": 7,
             "title": "Ультрабук Lenovo Yoga S940-14IIL",
             "price": 182543,
             "img": "https://img.mvideo.ru/Pdb/1100026038836b.jpg",
-            "category": "phone"
+            "category": "phone",
+            "description": {
+                "Диагональ": "14\"",
+                "Процессор": "Core i7 1065g7 1.3 ГГц",
+                "Оперативная память (RAM)": "16 ГБ",
+                "Графический контроллер": "Intel Iris Plus Graphics",
+                "Объем SSD": "1024 ГБ",
+                "Вес": "1.25 кг",
+                "Операционная система": "Windows",
+                "Подсветка клавиш": "Да"
+            }
         }
     ]
 }
