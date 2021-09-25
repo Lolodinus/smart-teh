@@ -1,0 +1,35 @@
+@import "../../style/color.scss";
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    
+    .error-message__header {
+        span {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background: center / contain no-repeat url("./icon/warning.svg");
+        }
+        h2 {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 36px;
+            font-weight: 700;
+            color: $primary-color;
+        }
+    }
+    .error-message__description {
+        font-size: 20px;
+        font-weight: 600;
+        color: $primary-color;
+    }
+}
