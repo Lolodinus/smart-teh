@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { cartActions } from "../../store/cart";
-import { priceFormat } from "../../utils"
+import { priceFormat } from "../../utils";
+import { TotalAmount } from "../../components/totalAmount";
 
 import style from "./cart.module.scss";
 
@@ -71,15 +72,7 @@ export const Cart = () => {
                     <ul className={ style.cart__list }>
                         { cartItems }
                     </ul>
-                    <section className={ `${ style["cart__total-amount"] } ${ style["total-amount"] }` }>
-                        <div className={ style["total-amount__info"] }>
-                            В корзине { cartProductsCount } товара...
-                            <div className={ style["total-amount__price"] }>{ priceFormat(totalPrice) } руб.</div>
-                        </div>
-                        <button className={ style["total-amount__btn"] }>
-                            Оформать заказ
-                        </button>
-                    </section>
+                    <TotalAmount clsses = { style["cart__total-amount"] }/>
                 </div>
             </>
         )

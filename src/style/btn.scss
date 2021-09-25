@@ -1,0 +1,20 @@
+@import "./color.scss";
+
+%btn-shared {
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: $accent-color;
+    font-size: 16px;
+    font-weight: 500;
+    color: $primary-color-text;
+    cursor: pointer;
+    
+    &:hover,
+    &:focus {
+        background-color: rgba($accent-color, .8);
+    }
+    &:active {
+        transform: scale(.99);
+    }
+}

@@ -2,6 +2,7 @@ import { productsActionTypes } from "./actions";
 
 const initialState = {
     products: [],
+    selectedProduct: {},
     loading: false
 }
 
@@ -21,6 +22,16 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: []
+            };
+        case productsActionTypes.GET_SELECTED_PRODUCT:
+            return {
+                ...state,
+                selectedProduct: action.payload
+            };
+        case productsActionTypes.CLEAR_SELECTED_PRODUCT:
+            return {
+                ...state,
+                selectedProduct: {}
             };
         default:
             return state;

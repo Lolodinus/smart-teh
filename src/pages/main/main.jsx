@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
+import { pageLinks} from "../../constant";
 import { productsActions } from "../../store/products";
 import { cartActions } from "../../store/cart";
 import { priceFormat } from "../../utils";
@@ -31,9 +33,12 @@ export const Main = () => {
                 </div>
                 <div className={`${style["main__item-info"]} ${style["info"]}`}>
                     <div className={style.info__title}>
-                        <a className={style["info__title-link"]} href="#">
+                        <Link
+                            to= { `${ pageLinks.productDetail}/${id}` }
+                            className={style["info__title-link"]}
+                        >
                             { title }
-                        </a>
+                        </Link>
                     </div>
                     <div className={style.info__bottom}>
                         <div className={style.info__price}>{ priceFormat(price) } руб.</div>

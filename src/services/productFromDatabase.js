@@ -8,20 +8,27 @@ export class ProductService {
             throw new Error(`Could not fetch ${url}` +
             `, received ${result.status}`);
         }
-        const products = await result.json()
-        return this.formatData(products);
+
+        return await result.json()
     }
 
-    formatData(products) {
-        return products.map(product => ({
+    _transformData(product) {
+        return {
             "id": product.id,
             "title": product.title,
             "price": product.price,
             "img": product.img,
-        }))
+            "category": product.category,
+        }
     }
 
     async getProducts() {
-        return await this.getResource("/product");
+        const products = await this.getResource("/product");
+        return products.map(this._transformData);
+    }
+
+    getSelectedProduct = async (id) => {
+        const product = await this.getResource(`/product/${id}`);
+        return this._transformData(product);
     }
 }

@@ -1,42 +1,42 @@
 {
     "product": [
         {
-            "id": 1,
+            "id": 0,
             "title": "Смартфон Samsung Galaxy Z Fold3 512GB Black (SM-F926B)",
             "price": 169990,
             "img": "https://img.mvideo.ru/Big/30058455bb.jpg",
             "category": "phone"
         },
         {
-            "id": 2,
+            "id": 1,
             "title": "Смартфон Samsung Galaxy S21 Ultra 512GB Phantom Black (SM-G998B)",
             "price": 118999,
             "img": "https://img.mvideo.ru/Big/30054893bb.jpg",
             "category": "phone"
         },
         {
-            "id": 3,
+            "id": 2,
             "title": "Смартфон Xiaomi Mi 11 256GB Midnight Gray",
             "price": 65990,
             "img": "https://img.mvideo.ru/Big/30056960bb.jpg",
             "category": "phone"
         },
         {
-            "id": 4,
+            "id": 3,
             "title": "Смартфон Huawei Mate Xs Interstellar Blue (TAH-N29M)",
             "price": 199990,
             "img": "https://img.mvideo.ru/Big/30048641bb.jpg",
             "category": "phone"
         },
         {
-            "id": 5,
+            "id": 4,
             "title": "Ноутбук Apple MacBook Pro 16 i9 2,4/64/8T/RP 5600M 8Gb Sil",
             "price": 657990,
             "img": "https://img.mvideo.ru/Big/30050792bb.jpg",
             "category": "laptop"
         },
         {
-            "id": 6,
+            "id": 5,
             "title": "Ноутбук Huawei MateBook X Pro MACHD-WFE9Q 16+1TB Emerald Green",
             "price": 137999,
             "img": "https://img.mvideo.ru/Big/30058015bb.jpg",
