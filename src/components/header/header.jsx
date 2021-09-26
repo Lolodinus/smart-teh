@@ -9,13 +9,13 @@ import style from "./header.module.scss"
 
 export const Header = () => {
     const dispatch = useDispatch();    
-    const { cartProductsCount } = useSelector((store) => store.cart);
+    const { totalQuantity } = useSelector((store) => store.cart);
 
     useEffect(() => {
         dispatch(cartActions.countOfProducts());
     }, []);
 
-    const productInCartExist = cartProductsCount ? style.active : "";
+    const productInCartExist = totalQuantity ? style.active : "";
 
     return (
         <header className={ style.header }>
@@ -28,7 +28,7 @@ export const Header = () => {
                         </h1>
                     </Link>
                     <Link className={ style.header__cart } to={ pageLinks.cart }>
-                        <span className={ productInCartExist }>{cartProductsCount}</span>
+                        <span className={ productInCartExist }>{totalQuantity}</span>
                     </Link>
                 </div>
             </div>

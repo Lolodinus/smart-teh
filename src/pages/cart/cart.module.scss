@@ -6,6 +6,11 @@
     margin: 0;
 }
 
+.cart {
+    display: flex;
+    flex-direction: column;
+}
+
 .cart__heading {
     margin: 25px 0;
     text-align: left;
@@ -26,6 +31,7 @@
 .cart__body {
     display: flex;
     align-items: flex-start;
+    flex-grow: 1;
 }
 
 .cart__list {
@@ -145,4 +151,10 @@
             }
         };
     }
+}
+
+.cart__empty {
+    font-size: 20px;
+    font-weight: 600;
+    color: $primary-color;
 }

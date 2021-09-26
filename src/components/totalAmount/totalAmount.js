@@ -6,13 +6,13 @@ import style from "./totalAmount.module.scss";
 
 export const TotalAmount = ({ clsses }) => {
     
-    const { cartProductsCount, totalPrice } = useSelector((store) => store.cart);
+    const { totalQuantity, totalPrice } = useSelector((store) => store.cart);
 
     return (
         
         <section className={ `${ clsses } ${ style["total-amount"] }` }>
             <div className={ style["total-amount__info"] }>
-                В корзине { cartProductsCount } товара...
+                В корзине { totalQuantity } товара...
                 <div className={ style["total-amount__price"] }>{ priceFormat(totalPrice) } руб.</div>
             </div>
             <button className={ style["total-amount__btn"] }>
