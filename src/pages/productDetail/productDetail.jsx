@@ -20,9 +20,6 @@ export const ProductDetail = () => {
         if (id && id!=="") {
             dispatch(productDetailActions.fetchProductDetail(id));
         }
-        // return () => {
-        //     dispatch(productsActions.clearSelectedProduct());
-        // }
     }, [id]);
     
     const addProductToCart = (product) => {
@@ -50,7 +47,6 @@ export const ProductDetail = () => {
     const errorMessage = error ? <ErrorMessage errorMessage={ error }/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content = !(loading || error) ? <View productDetail={ productDetail } renderDiscription={ renderDiscription } addProductToCart={ addProductToCart } /> : null;
-    // const content = !loading ? <View productDetail={ productDetail } renderDiscription={ renderDiscription } addProductToCart={ addProductToCart } /> : null;
 
     return (
         <>

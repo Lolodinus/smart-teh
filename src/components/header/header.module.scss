@@ -37,12 +37,13 @@ h1 {
     color: $primary-color-text;
     span {
         display: block;
-        height: 40px;
-        width: 40px;
+        height: 25px;
+        width: 25px;
         background: center / contain no-repeat url("./icon/logo.svg");
     }
     h1 {
         margin-left: 15px;
+        font-size: 25px;
     }
 }
 

@@ -2,25 +2,30 @@ import { productsActionTypes } from "./actions";
 
 const initialState = {
     products: [],
-    loading: false
+    loading: false,
+    error: null
 }
 
 export const productsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case productsActionTypes.SET_PRODUCTS:
+        case productsActionTypes.PRODUCTS_REQUEST:
             return {
                 ...state,
-                products: action.payload
+                products: [],
+                loading: true,
+                error: null
             };
-        case productsActionTypes.SET_LOADING:
+        case productsActionTypes.PRODUCTS_SUCCESS:
             return {
                 ...state,
-                loading: action.payload
+                products: action.payload,
+                loading: false
             };
-        case productsActionTypes.CLEAR_PRODUCTS:
+        case productsActionTypes.PRODUCTS_FAIL:
             return {
                 ...state,
-                products: []
+                loading: false,
+                error: action.payload
             };
         default:
             return state;

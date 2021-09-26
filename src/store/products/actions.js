@@ -1,27 +1,24 @@
 import { ProductService } from "../../services"
 
 export const productsActionTypes = {
-    SET_PRODUCTS: "PRODUCT.SET_PRODUCTS",
-    CLEAR_PRODUCTS: "PRODUCT.CLEAR_PRODUCTS",
-    SET_LOADING: "PRODUCT.SET_LOADING"
+    PRODUCTS_REQUEST: "PRODUCTS.PRODUCTS_REQUEST",
+    PRODUCTS_SUCCESS: "PRODUCTS.PRODUCTS_SUCCESS",
+    PRODUCTS_FAIL: "PRODUCTS.PRODUCTS_FAIL",
 }
 
 export const productsActions = {
-    setProducts: (products) => ({type: productsActionTypes.SET_PRODUCTS, payload: products}),
-    clearProducts: () => ({type: productsActionTypes.CLEAR_PRODUCTS}),
-    setLoading: (loading) => ({type: productsActionTypes.SET_LOADING, payload: loading}),
+    productsRequest: () => ({type: productsActionTypes.PRODUCTS_REQUEST}),
+    productsSuccess: (products) => ({type: productsActionTypes.PRODUCTS_SUCCESS, payload: products}),
+    productsFail: (error) => ({type: productsActionTypes.PRODUCTS_FAIL, payload: error}),
 
     fetchProducts: () => async (dispatch) => {
-        dispatch(productsActions.setLoading(true));
         const service = new ProductService();
         try {
+            dispatch(productsActions.productsRequest());
             const products = await service.getProducts();
-            
-            dispatch(productsActions.setProducts(products));
+            dispatch(productsActions.productsSuccess(products));
         } catch(error) {
-            console.log(error.message);
-        } finally {
-            dispatch(productsActions.setLoading(false));
-        }
+            dispatch(productsActions.productsFail(error.message));
+        } 
     }
 }
