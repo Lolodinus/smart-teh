@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { pageLinks} from "../../constant";
-import { cartActions } from "../../store/cart";
+import { filterActions } from "../../store/filter";
+import { SearchFilter } from "../searchFilter/searchFilter";
 
 import style from "./header.module.scss"
 
@@ -11,9 +11,9 @@ export const Header = () => {
     const dispatch = useDispatch();    
     const { totalQuantity } = useSelector((store) => store.cart);
 
-    useEffect(() => {
-        dispatch(cartActions.countOfProducts());
-    }, []);
+    const refreshPage = () => {        
+        dispatch(filterActions.setSearchQuery(""));
+    }
 
     const productInCartExist = totalQuantity ? style.active : "";
 
@@ -21,7 +21,12 @@ export const Header = () => {
         <header className={ style.header }>
             <div className={ style.header__container }>
                 <div className={ style.header__row }>
-                    <Link className={ style.header__logo } to={ pageLinks.main }>
+                    <SearchFilter classes={ style.header__search }/>
+                    <Link 
+                        className={ style.header__logo }
+                        to={ pageLinks.main }
+                        onClick={ refreshPage }
+                    >
                         <span className={ style["header__logo-icon"] }></span>
                         <h1>
                             Smart Teh

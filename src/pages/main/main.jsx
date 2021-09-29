@@ -11,12 +11,24 @@ import style from "./main.module.scss";
 export const Main = () => {
     const dispatch = useDispatch();
     const { products, loading, error } = useSelector((store) => store.products);
+    const { searchQuery } = useSelector((store) => store.filter);
 
     useEffect(() => {
-        dispatch(productsActions.fetchProducts())
+        dispatch(productsActions.fetchProducts());
     }, []);
 
-    const productItems = products.map((product) => {
+    const searchFilter = (products, searchQuery) => {
+        if (products && searchQuery !== "") {
+            return products.filter(
+                product => 
+                    product.title.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0 ||
+                    product.category.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0
+            );
+        }
+        return products;
+    }
+
+    const productItems = (products) => products.map((product) => {
         const { id } = product;
         return (
             <ProductCard 
@@ -24,12 +36,11 @@ export const Main = () => {
                 key={ id }
             />
         )
-                
     })
     
     const errorMessage = error ? <ErrorMessage errorMessage={ error }/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error) ? productItems : null;
+    const content = !(loading || error) ? productItems(searchFilter(products, searchQuery)) : null;
 
     return (
         <ul className= {style.main__list}>

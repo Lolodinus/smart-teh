@@ -1,0 +1,50 @@
+@import "../../style/color.scss";
+
+.search {
+    position: relative;
+
+    .search__input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-bottom: 2px solid $divider-color;
+        padding: 0 15% 0 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: $primary-color-text;
+        background-color: transparent;
+        &:hover,
+        &:focus {
+            border-bottom: 2px solid $primary-color-text;
+            outline: none;
+        }
+    }
+    &:hover,
+    &:focus {
+        .search__btn {
+            &::after {
+                background: center / contain no-repeat url("./icon/search.svg");
+            }
+        }
+    }
+    .search__btn {
+        height: 100%;
+        width: 15%;
+        border: none;
+        border-radius: 10px;
+        background-color: transparent;
+
+        position: absolute;
+        right: 0;
+        top: 0;
+        &::after {
+            content: "";
+            background: center / contain no-repeat url("./icon/search_unactive.svg");
+            position: absolute;
+            top: 7px;
+            bottom: 7px;
+            left: 7px;
+            right: 7px;
+        }
+    }
+}
