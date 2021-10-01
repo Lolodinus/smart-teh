@@ -111,7 +111,7 @@
             .cart__item-quantity {
                 display: flex;
                 flex-grow: 1;
-                align-items: end;
+                align-items: flex-end;
                 justify-content: center;
                 input {
                     width: 50px;

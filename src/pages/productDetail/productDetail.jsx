@@ -20,7 +20,7 @@ export const ProductDetail = () => {
         if (id && id!=="") {
             dispatch(productDetailActions.fetchProductDetail(id));
         }
-    }, [id]);
+    }, [dispatch, id]);
     
     const addProductToCart = (product) => {
         dispatch(cartActions.addProductToCart(product));

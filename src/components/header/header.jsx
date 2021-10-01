@@ -11,8 +11,8 @@ export const Header = () => {
     const dispatch = useDispatch();    
     const { totalQuantity } = useSelector((store) => store.cart);
 
-    const refreshPage = () => {        
-        dispatch(filterActions.setSearchQuery(""));
+    const refreshPage = () => {
+        dispatch(filterActions.resetFilter());
     }
 
     const productInCartExist = totalQuantity ? style.active : "";

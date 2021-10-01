@@ -18,41 +18,17 @@ ul {
     list-style: none;
 }
 
+.main {
+    margin-top: 30px;
+    width: auto;
+}
+
 .main__list {
-    width: 100%;
+    margin: 0 -15px;
+    min-width: 0px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
-
-    .main__item {
-        width: 220px;
-        min-height: 350px;
-        margin: 0 15px;
-        margin-bottom: 30px;
-        border-radius: 20px;
-        overflow: hidden;
-        background-color: $primary-color-text;
-
-        display: flex;
-        flex-direction: column;
-        
-        .main__item-img {
-            width: 100%;
-            height: 180px;
-            padding: 15px;
-            object-fit: contain;
-
-            img {
-                height: 100%;
-                width: 100%;
-                object-fit: contain;
-            }
-        };
-        .main__item-info {
-            flex-grow: 1;
-        }
-    }
+    justify-content: left;
 }
 
 .info {
@@ -78,7 +54,7 @@ ul {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: flex-end;
 
         .info__price {
             margin-top: 10px;
