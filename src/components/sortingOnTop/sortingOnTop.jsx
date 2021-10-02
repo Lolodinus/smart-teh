@@ -27,15 +27,10 @@ export const SortingOnTop = () => {
     }
 
     useEffect(()=> {
-        if (JSON.stringify(selection) !== '{}') {
-            if ( filterBy !== selection.value) {
-                dispatch(filterActions.setFilter(selection.value));
-            }
-        }
         if (filterBy === "all") {
             setSelection({});
         }
-    }, [dispatch, selection, filterBy])
+    }, [filterBy])
 
     const optionItems = options.map(option => {
         return (

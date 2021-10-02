@@ -21,7 +21,6 @@ export const Cart = () => {
             />
         )
     });
-    console.log(cartItems);
     const content = cartItems.length > 0 ? <View cartItems={ cartItems } clsses={ style["cart__total-amount"] }/> : <div className={ style.cart__empty }>Корзина пуста...</div>;
 
     return (

@@ -18,21 +18,21 @@
             border-bottom: 2px solid $primary-color-text;
             outline: none;
         }
-    }
-    &:hover,
-    &:focus {
-        .search__btn {
+        &:hover ~ .search__btn,
+        &:focus ~ .search__btn {
             &::after {
                 background: center / contain no-repeat url("./icon/search.svg");
             }
         }
     }
+    
     .search__btn {
         height: 100%;
         width: 15%;
         border: none;
         border-radius: 10px;
         background-color: transparent;
+        cursor: pointer;
 
         position: absolute;
         right: 0;
