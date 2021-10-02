@@ -46,6 +46,7 @@
         background-color: white;
         overflow: hidden;
         position: relative;
+        box-shadow: 0 0 10px $primary-color-dark;
 
         .cart__item-delete {
             height: 25px;

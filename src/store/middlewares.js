@@ -11,4 +11,5 @@ const thunk = (store) => (next) => (action) => {
     return next(action);
 }
 
+
 export const middlewares = composeWithDevTools(applyMiddleware(thunk));
