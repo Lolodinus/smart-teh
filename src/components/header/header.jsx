@@ -10,12 +10,22 @@ import style from "./header.module.scss"
 export const Header = () => {
     const dispatch = useDispatch();    
     const { totalQuantity } = useSelector((store) => store.cart);
+    const { isLoginIn } = useSelector((store) => store.auth);
 
     const refreshPage = () => {
         dispatch(filterActions.resetFilter());
     }
 
     const productInCartExist = totalQuantity ? style.active : "";
+    const userLogIn = isLoginIn 
+    ?
+    <Link className={ style.header__authentification } to={ pageLinks.authentification }>
+        Выйти
+    </Link>
+    :
+    <Link className={ style.header__authentification } to={ pageLinks.authentification }>
+        Войти
+    </Link>;
 
     return (
         <header className={ style.header }>
@@ -32,9 +42,12 @@ export const Header = () => {
                             Smart Teh
                         </h1>
                     </Link>
-                    <Link className={ style.header__cart } to={ pageLinks.cart }>
-                        <span className={ productInCartExist }>{totalQuantity}</span>
-                    </Link>
+                    <div className={ style["header__action-left"] }>
+                        {userLogIn}
+                        <Link className={ style.header__cart } to={ pageLinks.cart }>
+                            <span className={ productInCartExist }>{totalQuantity}</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </header>

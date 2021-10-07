@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import { store } from "../../store/index";
 import { pageLinks } from "../../constant";
 import { Header } from "../header";
-import { Main, Cart, ProductDetail } from "../../pages";
+import { Main, Cart, ProductDetail, Authentification } from "../../pages";
 
 
 import style from "./app.module.scss";
@@ -20,6 +20,7 @@ export const App = () => {
               <Route path={ pageLinks.main } exact component={ Main } />
               <Route path={ pageLinks.cart } component={ Cart } />
               <Route path={ `${ pageLinks.productDetail }/:id` } component={ ProductDetail } />
+              <Route path={ pageLinks.authentification } component={ Authentification } />
             </Switch>
           </div>
         </div>

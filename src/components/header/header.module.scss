@@ -1,4 +1,5 @@
 @import "../../style/color";
+@import "../../style/btn.scss";
 
 
 h1 {
@@ -88,4 +89,20 @@ h1 {
             display: flex;
         }
     }
+}
+
+.header__authentification {
+    height: 35px;
+    margin-right: 15px;
+    padding: 0 10px;
+    @extend %btn-shared;
+    
+    display: flex;
+    align-items: center;
+}
+
+.header__action-left {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }

@@ -15,4 +15,5 @@ function saveToLocalStorage(state) {
 
 export const store = createStore(reducers, middlewares)
 
+
 store.subscribe(() => saveToLocalStorage(store.getState()));

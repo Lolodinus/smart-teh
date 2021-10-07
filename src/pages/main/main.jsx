@@ -9,6 +9,7 @@ import { productsActions } from "../../store/products";
 
 import style from "./main.module.scss";
 
+
 export const Main = () => {
     const dispatch = useDispatch();
     const { products, loading, error } = useSelector((store) => store.products);
