@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
+import { Switch, Route, useLocation, useRouteMatch, useHistory } from "react-router-dom";
 import { signOut } from "firebase/auth";
 
 import { authentificationActions } from "../../store/authentication"
@@ -10,12 +10,16 @@ import { auth } from "../../config/firebase";
 
 export const Authentification = () => {
     const { isLoginIn } = useSelector((store) => store.auth);
-
+    
+    const location = useLocation();
     const { path } = useRouteMatch();
     const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
+        if (location.pathname !== "/authentification") {
+            return
+        }
         if (!isLoginIn) {
             history.push(`${path}${pageLinks.login}`);
         } else {
@@ -27,7 +31,7 @@ export const Authentification = () => {
                   console.log(error);
               });
         }
-    }, [])
+    }, [location])
 
 
     return (
