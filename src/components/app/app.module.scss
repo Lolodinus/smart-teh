@@ -7,9 +7,22 @@ html, body {
 .app {
   min-height: 100vh;
   text-align: center;
-  background-color: $primary-color-light;
+  background-color: rgba($primary-color-light, .9);
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: center / cover url("./board.png");
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
 }
 
 .app__container {

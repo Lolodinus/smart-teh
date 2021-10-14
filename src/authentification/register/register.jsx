@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore"; 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import { authentificationActions } from "../../store/authentication";
-import { auth } from "../../config/firebase";
+import { auth, database } from "../../config/firebase";
 import { useInput, useFirebaseErrorHandler } from "../../components/formValidation";
 
 import style from "./register.module.scss";
@@ -51,6 +52,17 @@ export const Register = () => {
                 dispatch(authentificationActions.setUser(data));
                 history.push("/");
             });
+            return user
+        })
+        .then(async (user) => {
+            const userData = {
+                username: login.value,
+                email: email.value,
+                createdAt: new Date(),
+            }
+
+            await setDoc(doc(database, "users", user.uid), userData);
+              console.log("Document written with ID: ", user.uid);
         })
         .catch((error) => {
             console.log(error.code);
@@ -159,7 +171,7 @@ export const Register = () => {
                     type="submit"
                     disabled={ validForm }
                 >
-                    Войти
+                    Зарегистрация
                 </button>
             </form>
         </section>
