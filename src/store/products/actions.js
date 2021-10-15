@@ -1,4 +1,4 @@
-import { ProductService } from "../../services"
+import { getAllProduct } from "../../utils"
 
 export const productsActionTypes = {
     PRODUCTS_REQUEST: "PRODUCTS.PRODUCTS_REQUEST",
@@ -12,10 +12,9 @@ export const productsActions = {
     productsFail: (error) => ({type: productsActionTypes.PRODUCTS_FAIL, payload: error}),
 
     fetchProducts: () => async (dispatch) => {
-        const service = new ProductService();
         try {
             dispatch(productsActions.productsRequest());
-            const products = await service.getProducts();
+            const products = await getAllProduct();
             dispatch(productsActions.productsSuccess(products));
         } catch(error) {
             dispatch(productsActions.productsFail(error.message));

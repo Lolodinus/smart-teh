@@ -7,7 +7,6 @@ import { ErrorMessage } from "../../components/errorMessage";
 import { productDetailActions } from "../../store/productDetail";
 import { cartActions } from "../../store/cart";
 import { priceFormat } from "../../utils";
-
 import style from "./productDetail.module.scss";
 
 export const ProductDetail = () => {
@@ -20,7 +19,7 @@ export const ProductDetail = () => {
         if (id && id!=="") {
             dispatch(productDetailActions.fetchProductDetail(id));
         }
-    }, [dispatch, id]);
+    }, [id]);
     
     const addProductToCart = (product) => {
         dispatch(cartActions.addProductToCart(product));
