@@ -1,4 +1,3 @@
-// import { getAllProduct, getProductOnPage } from "../../utils";
 import { getAlgoliaSearchData } from "../../utils/algolia";
 
 export const productsActionTypes = {
@@ -14,35 +13,12 @@ export const productsActions = {
     productsFail: (error) => ({type: productsActionTypes.PRODUCTS_FAIL, payload: error}),
     productsSetCurrentPage: (page) => ({type: productsActionTypes.PRODUCTS_SET_CURRENT_PAGE, payload: page}),
 
-    // fetchProducts: () => async (dispatch) => {
-    //     try {
-    //         dispatch(productsActions.productsRequest());
-    //         const products = await getAllProduct();
-    //         dispatch(productsActions.productsSuccess(products));
-    //     } catch(error) {
-    //         dispatch(productsActions.productsFail(error.message));
-    //     } 
-    // },
-    // fetchProductOnPage: (page, itemsOnPage) => async (dispatch) => {
-    //     try {
-    //         dispatch(productsActions.productsRequest());
-    //         const {products, totalProduct} = await getProductOnPage(page, itemsOnPage);
-    //         dispatch(productsActions.productsSuccess({
-    //             products, 
-    //             totalProduct
-    //         }));
-    //     } catch(error) {
-    //         dispatch(productsActions.productsFail(error.message));
-    //     } 
-    // },
     fetchProducts: (searchText, itemsOnPage, currentPage) => async (dispatch) => {
         try {
             dispatch(productsActions.productsRequest());
             const algoliaData = await getAlgoliaSearchData("product", searchText, itemsOnPage, currentPage);
             const products = algoliaData.hits;
-            // console.log(products);
             const totalPages = +algoliaData.nbPages;
-            // console.log(totalPages);
             dispatch(productsActions.productsSuccess(products, totalPages));
         } catch(error) {
             dispatch(productsActions.productsFail(error.message));

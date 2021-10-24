@@ -1,0 +1,37 @@
+@import "../../style/color.scss";
+
+.undefined-page {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .undefined-page__title {
+        font-size: 36px;
+        font-weight: 700;
+        color: $primary-color-dark;
+    }
+    .undefined-page__image {
+        height: 200px;
+        width: 200px;
+        background: center / contain no-repeat url("./icon/error_icon.svg");
+    }
+    .undefined-page__message {
+        font-size: 16px;
+        font-weight: 600;
+        color: $primary-color-dark;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+        
+        &:active {
+            transform: scale(.99);
+        }
+    }
+}

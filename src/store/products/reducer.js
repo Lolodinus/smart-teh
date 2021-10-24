@@ -4,7 +4,7 @@ const initialState = {
     products: [],
     totalPages: 0,
     currentPage: 1,
-    productsOnPage: 2,
+    productsOnPage: 5,
     loading: false,
     error: null
 }

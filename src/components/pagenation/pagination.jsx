@@ -39,7 +39,7 @@ export const Pages = ({totalPages, currentPage, setCurrentPage}) => {
     return (
         <section className={style.pages}>
             <ul className={style.pages__list}>
-                { totalPages && totalPages >= 1 ? getPages() : null }
+                { totalPages && totalPages > 1 ? getPages() : null }
             </ul>
         </section>
     )
