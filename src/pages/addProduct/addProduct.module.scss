@@ -1,0 +1,94 @@
+@import "../../style/color.scss";
+@import "../../style/btn.scss";
+
+.add-product {
+    .add-product__title {
+        font-size: 36px;
+        font-weight: 700;
+        color: $primary-color;
+    }
+    .add-product__form {
+        width: 50%;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        .add-product__heading {
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: $primary-color;
+        }
+        .add-product__field {
+            margin-bottom: 10px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+
+            .add-product__input {
+                height: 40px;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+                padding: 10px;
+
+                font-size: 16px;
+                font-weight: 500;
+                color: $primary-color-dark;
+            }
+            .add-product__half-input {
+                width: 50%;
+                height: 40px;
+                border: none;
+                border-radius: 10px;
+                padding: 10px;
+
+                font-size: 16px;
+                font-weight: 500;
+                color: $primary-color-dark;
+
+                &:nth-child(2n) {
+                    margin-left: 10px;
+                }
+            }
+            .add-product__add-field-btn,
+            .add-product__delete-field-btn {
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                border: none;
+                font-size: 16px;
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+
+                &:hover,
+                &:focus {
+                    opacity: .5;
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                &:active {
+                    transform: translate(-50%, -50%) scale(0.9);
+                }
+            }
+            .add-product__add-field-btn {
+                right: -60px;
+                background-color: $primary-color;
+                color: $primary-color-text;
+            }
+            .add-product__delete-field-btn {
+                right: -100px;
+                border: 2px solid $primary-color;
+                color: $primary-color;
+            }
+        }
+        hr {
+            height: 3px;
+            border: none;
+            background-color: $primary-color;
+        }
+        .add-product__btn {
+            @extend %btn-shared;
+        }
+    }
+}

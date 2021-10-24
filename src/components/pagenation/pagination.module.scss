@@ -1,0 +1,65 @@
+@import "../../style/color.scss";
+
+.pages {
+    margin-top: 25px;
+}
+
+.pages__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pages__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 40px;
+        min-width: 40px;
+        border-radius: 5px;
+        background-color: $primary-color-text;
+        padding: 5px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            position: relative;
+            z-index: 2;
+            &::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top:50%;
+                transform: translate(-50%, -50%);
+
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
+                border: 2px solid $primary-color;
+                z-index: -1;
+            }
+        }
+
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
+
+        &._active {
+            background-color: $primary-color;
+            color: $primary-color-text;
+            cursor: auto;
+
+            &:hover,
+            &:focus {
+                z-index: 1;
+                &::before {
+                    content: "";
+                    border: none;
+                }
+            }
+            
+        }
+    }
+}

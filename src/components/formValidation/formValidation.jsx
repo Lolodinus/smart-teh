@@ -89,11 +89,11 @@ const useValidation = (value, validations) => {
             }
         }
         setErrorMessage(message);
+        // eslint-disable-next-line
     }, [value])
 
     useEffect(() => {
         isEmpty || minLengthError || maxLengthError || confirmPasswordError || emailError || specialCharError ? setInputValid(false) : setInputValid(true);
-        // errorMessage ? setInputValid(false) : setInputValid(true);
     }, [isEmpty, minLengthError, maxLengthError, confirmPasswordError, emailError, specialCharError ])
 
     return {

@@ -1,0 +1,1 @@
+export { SearchAlgolia } from "./searchAlgolia";

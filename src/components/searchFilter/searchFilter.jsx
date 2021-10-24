@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { filterActions } from "../../store/filter"
@@ -7,16 +7,14 @@ import style from "./searchFilter.module.scss";
 export const SearchFilter = ({ classes }) => {
     const { searchQuery } = useSelector((store) => store.filter);
     const dispatch = useDispatch();
-    let [keyword, setKeyword] = useState("");
 
-    
-    useEffect(() => {
-        setKeyword(searchQuery)
-    }, [searchQuery]);
+
+    const handleSearchQuery = (e) => {
+        dispatch(filterActions.setSearchQuery(e.target.value));
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(filterActions.setSearchQuery(keyword));
     }
 
     return (
@@ -24,9 +22,9 @@ export const SearchFilter = ({ classes }) => {
             <input 
                 type="text"
                 className={ style.search__input }
-                onChange={ (e) => setKeyword(e.target.value) }
+                onChange={ (e) => handleSearchQuery(e) }
                 placeholder="Поиск по сайту"
-                value={ keyword }
+                value={ searchQuery }
             />
             <button
                 type="submit" 

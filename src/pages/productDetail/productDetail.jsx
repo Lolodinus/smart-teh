@@ -7,6 +7,7 @@ import { ErrorMessage } from "../../components/errorMessage";
 import { productDetailActions } from "../../store/productDetail";
 import { cartActions } from "../../store/cart";
 import { priceFormat } from "../../utils";
+
 import style from "./productDetail.module.scss";
 
 export const ProductDetail = () => {
@@ -19,28 +20,30 @@ export const ProductDetail = () => {
         if (id && id!=="") {
             dispatch(productDetailActions.fetchProductDetail(id));
         }
-    }, [id]);
+    }, [dispatch, id]);
     
     const addProductToCart = (product) => {
         dispatch(cartActions.addProductToCart(product));
     }
 
     const renderDiscription = (description) => {
-        if (description && description !== "") {
-            return Object.keys(description).map(key => (
-                <li 
+        return description && description.length > 0
+            ? description.map((specification, index) => {
+                return <li 
                     className={ style["product-detail__discription-item"] }
-                    key={ key }
+                    key={ index }
                 >
                     <div className={ style["product-detail__discription-item-key"] }>
-                        {key}
+                        {specification.specification}
                     </div>
                     <div className={ style["product-detail__discription-item-value"] }>
-                        { description[key] }
+                        { specification.specificationValue }
                     </div>
                 </li>
-            ))
-        }
+            })
+            : <li className={ style["product-detail__discription-item"] }>
+                У нас нет детальной информации по этому товару :(
+            </li>
     }
 
     const errorMessage = error ? <ErrorMessage errorMessage={ error }/> : null;
@@ -57,8 +60,8 @@ export const ProductDetail = () => {
 }
 
 const View = ({ productDetail, renderDiscription, addProductToCart}) => {
-    const {title, price, img, description} = productDetail;
-    const productDiscription = renderDiscription(description);
+    const {title, price, img, detail} = productDetail;
+    const productDiscription = renderDiscription(detail);
     return (
         <div className={ style["product-detail"] }>
             <div className={ style["product-detail__left"] }>

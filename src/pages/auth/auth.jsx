@@ -31,7 +31,7 @@ export const Authentification = () => {
                   console.log(error);
               });
         }
-    }, [location])
+    }, [dispatch, history, location, isLoginIn, path])
 
 
     return (

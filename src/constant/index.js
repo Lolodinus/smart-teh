@@ -4,5 +4,6 @@ export const pageLinks = {
     productDetail: "/product",
     authentification: "/authentification",
     login: "/login",
-    register: "/register"
+    register: "/register",
+    addProduct: "/add_product"
 }

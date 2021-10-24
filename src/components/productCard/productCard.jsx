@@ -48,6 +48,6 @@ export const ProductCard = ({product}) => {
                     </div>
                 </div>
             </div>
-            </li>
+        </li>
     )
 }
