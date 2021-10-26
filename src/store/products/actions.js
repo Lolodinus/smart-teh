@@ -13,10 +13,10 @@ export const productsActions = {
     productsFail: (error) => ({type: productsActionTypes.PRODUCTS_FAIL, payload: error}),
     productsSetCurrentPage: (page) => ({type: productsActionTypes.PRODUCTS_SET_CURRENT_PAGE, payload: page}),
 
-    fetchProducts: (searchText, itemsOnPage, currentPage) => async (dispatch) => {
+    fetchProducts: (searchText, itemsOnPage, currentPage, sorting) => async (dispatch) => {
         try {
             dispatch(productsActions.productsRequest());
-            const algoliaData = await getAlgoliaSearchData("product", searchText, itemsOnPage, currentPage);
+            const algoliaData = await getAlgoliaSearchData(searchText, itemsOnPage, currentPage, sorting);
             const products = algoliaData.hits;
             const totalPages = +algoliaData.nbPages;
             dispatch(productsActions.productsSuccess(products, totalPages));

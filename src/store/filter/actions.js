@@ -7,5 +7,5 @@ export const filterActionTypes = {
 export const filterActions = {
     setFilter: (filterBy) => ({type: filterActionTypes.SET_FILTER, payload: filterBy}),
     setSearchQuery: (searchQuery) => ({type: filterActionTypes.SET_SEARCH_QUERY, payload: searchQuery}),
-    resetFilter: (searchQuery) => ({type: filterActionTypes.RESET_FILTER}),
+    resetFilter: () => ({type: filterActionTypes.RESET_FILTER}),
 }

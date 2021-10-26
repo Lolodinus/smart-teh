@@ -6,8 +6,8 @@ import { filterActions } from "../../store/filter";
 import style from "./sortingOnTop.module.scss";
 
 const options = [
-    {id: 0, title: "По низкой цене", value: "price low"},
-    {id: 1, title: "По высокой цене", value: "price high"},
+    {id: 0, title: "По низкой цене", value: "priceLow"},
+    {id: 1, title: "По высокой цене", value: "priceHigh"},
 ]
 
 export const SortingOnTop = () => {
@@ -19,16 +19,34 @@ export const SortingOnTop = () => {
     const handleOnClick = (option) => {
         if (selection.id !== option.id || JSON.stringify(selection) === '{}') {
             setSelection(option);
-            if ( filterBy !== option.value) {
-                dispatch(filterActions.setFilter(option.value));
-            }
         }
         setOpen(false);
     }
 
     useEffect(()=> {
-        if (filterBy === "all") {
-            setSelection({});
+        if (selection.value === "priceLow") {
+            dispatch(filterActions.setFilter(selection.value));
+        } else if (selection.value === "priceHigh") {
+            dispatch(filterActions.setFilter(selection.value));
+        }
+    }, [dispatch, selection])
+
+    useEffect(()=> {
+        switch(filterBy) {
+            case "priceLow":
+                return setSelection({
+                    id: 0,
+                    title: "По низкой цене",
+                    value: "priceLow"
+                });
+            case "priceHigh":
+                return setSelection({
+                    id: 0,
+                    title: "По высокой цене",
+                    value: "priceHigh"
+                });
+            default:
+                return setSelection({});
         }
     }, [filterBy])
 
@@ -50,7 +68,7 @@ export const SortingOnTop = () => {
             <button 
                 className={ style.select__current }
                 onClick={ () => setOpen(!open) }
-                onKeyDown={ () => setOpen(!open) }
+                // onKeyDown={ () => setOpen(!open) }
             >
                 {JSON.stringify(selection) !== '{}' ? selection.title : "Сортировать по..."}
             </button>

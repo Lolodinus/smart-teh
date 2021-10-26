@@ -16,10 +16,11 @@ export const SearchAlgolia = () => {
 
     // search filter
     const { searchQuery } = useSelector((store) => store.filter);
+    const { filterBy } = useSelector((store) => store.filter);
 
     useEffect(() => {
-        dispatch(productsActions.fetchProducts(searchQuery, productsOnPage, currentPage));
-    }, [dispatch, currentPage, searchQuery, productsOnPage]);
+        dispatch(productsActions.fetchProducts(searchQuery, productsOnPage, currentPage, filterBy));
+    }, [dispatch, currentPage, searchQuery, productsOnPage, filterBy]);
 
     const renderProduct = () => {
         return products && products.length > 0
