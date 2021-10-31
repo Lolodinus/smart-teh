@@ -1,4 +1,4 @@
-import { searchOnlyClient, indexAlgolia } from "../config/algolia";
+import { searchOnlyClient } from "../config/algolia";
 
 const _transformData = (data) => {
     const newData = {
@@ -10,16 +10,16 @@ const _transformData = (data) => {
             };
             delete newProduct.objectID;
             return newProduct
-        })
+        }),
     };
     return newData
 }
 
 const _sortingBy = async (sorting) => {
     const _sortTypes = {
-        "priceHigh": {indexName: "product_price_deck", customRanking: "desc(price)"},
-        "priceLow": {indexName: "product", customRanking: "asc(price)"},
-        "all": {indexName: "product", customRanking: "asc(price)"}
+        "priceHigh": "product_price_desc",
+        "priceLow": "product_price_asc",
+        "all": "product"
     }
 
     if (_sortTypes.hasOwnProperty(sorting)) {
@@ -30,18 +30,60 @@ const _sortingBy = async (sorting) => {
 } 
 
 const _checkSorting = async (sorting) => {
-    const { indexName, customRanking } = await _sortingBy(sorting);
-    await indexAlgolia.setSettings({customRanking: [customRanking]});
+    const indexName = await _sortingBy(sorting);
     return indexName;
 } 
 
-export const getAlgoliaSearchData = async (searchText, itemsOnPage, currentPage, sorting) => {
+const _checkFilterPrice = (filters) => {
+    if (filters.minPrice && filters.maxPrice) {
+        return `price:${ filters.minPrice } TO ${ filters.maxPrice }`;
+    } else if (filters.minPrice) {
+        console.log(filters.minPrice);
+        return `price >= ${ filters.minPrice }`;
+    } else {
+        return `price <= ${ filters.maxPrice }`;
+    }
+}
+
+const _getFilter = (filters) => {
+    const algoliaFilters = [];
+    if ((filters.hasOwnProperty("minPrice") && filters.minPrice) || (filters.hasOwnProperty("maxPrice") && filters.maxPrice)) {
+        algoliaFilters.push(_checkFilterPrice(filters));
+    }
+    return algoliaFilters;
+}
+
+export const getAlgoliaSearchFilterConfig = async (algoliaSearchConfig, filter) => {
+    const filters = filter ? _getFilter(filter) : "";
+    let algoliaFilters = filters.length > 0 ? filters.join(" AND ") : "";
+
+    const newAlgoliaSearchConfig = {
+        ...algoliaSearchConfig,
+        filters: algoliaFilters,
+    };
+    return algoliaFilters.length > 0 ? newAlgoliaSearchConfig : algoliaSearchConfig;
+}
+
+export const getAlgoliaSearchData = async (searchText, itemsOnPage, currentPage, sorting, filter) => {
+    
+    // check sorting
+    const newIndexName = await _checkSorting(sorting);
+
+    // check currentPage exist
     const page = !currentPage ? 1 : currentPage;
-    const indexName = await _checkSorting(sorting);
-    const searchIndex = await searchOnlyClient.initIndex(indexName);
-    const algoliaSearchData = await searchIndex.search(searchText, {
+    
+    let algoliaSearchConfig = {
         hitsPerPage: itemsOnPage,
         page: page - 1,
-    });
+    };
+
+    // check filter
+    algoliaSearchConfig = filter 
+        ? await getAlgoliaSearchFilterConfig(algoliaSearchConfig, filter) 
+        : algoliaSearchConfig;
+    
+
+    const searchIndex = await searchOnlyClient.initIndex(newIndexName);
+    const algoliaSearchData = await searchIndex.search(searchText, algoliaSearchConfig);
     return _transformData(algoliaSearchData);
 }

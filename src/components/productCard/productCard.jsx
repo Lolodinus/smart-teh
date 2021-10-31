@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { cartActions } from "../../store/cart";
 import { pageLinks} from "../../constant";
-import { priceFormat } from "../../utils";
+import { priceFormat, cutString } from "../../utils";
 
 import style from "./productCard.module.scss";
 
@@ -34,7 +34,7 @@ export const ProductCard = ({product}) => {
                             to= { `${ pageLinks.productDetail}/${id}` }
                             className={style["info__title-link"]}
                         >
-                            { title }
+                            { cutString(title, 50) }
                         </Link>
                     </div>
                     <div className={style.info__bottom}>

@@ -3,6 +3,8 @@ import { filterActionTypes } from "./actions";
 const initialState = {
     searchQuery: "",
     filterBy: "all",
+    minPrice: "",
+    maxPrice: "",
 }
 
 export const filterReducer = (state = initialState, action) => {
@@ -21,7 +23,19 @@ export const filterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchQuery: "",
-                filterBy: "all"
+                filterBy: "all",
+                minPrice: "",
+                maxPrice: "",
+            };
+        case filterActionTypes.SET_MIN_PRICE:
+            return {
+                ...state,
+                minPrice: action.payload,
+            };
+        case filterActionTypes.SET_MAX_PRICE:
+            return {
+                ...state,
+                maxPrice: action.payload,
             };
         default:
             return state;

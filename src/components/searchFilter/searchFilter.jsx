@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { filterActions } from "../../store/filter"
+import { filterActions } from "../../store/filter";
 import style from "./searchFilter.module.scss";
 
 export const SearchFilter = ({ classes }) => {

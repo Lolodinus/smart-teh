@@ -17,19 +17,10 @@ export const SortingOnTop = () => {
     const { filterBy } = useSelector((store) => store.filter);
 
     const handleOnClick = (option) => {
-        if (selection.id !== option.id || JSON.stringify(selection) === '{}') {
-            setSelection(option);
-        }
+        setSelection(option)
+        dispatch(filterActions.setFilter(option.value));
         setOpen(false);
     }
-
-    useEffect(()=> {
-        if (selection.value === "priceLow") {
-            dispatch(filterActions.setFilter(selection.value));
-        } else if (selection.value === "priceHigh") {
-            dispatch(filterActions.setFilter(selection.value));
-        }
-    }, [dispatch, selection])
 
     useEffect(()=> {
         switch(filterBy) {

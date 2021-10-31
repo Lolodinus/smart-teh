@@ -1,5 +1,8 @@
 .algolia-search {
+    flex-grow: 1;
+    position: relative;
     .algolia-search__list {
+        width: auto;
         margin: 0 -15px;
         min-width: 0px;
         display: flex;

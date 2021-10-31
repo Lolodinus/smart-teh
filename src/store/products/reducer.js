@@ -6,7 +6,9 @@ const initialState = {
     currentPage: 1,
     productsOnPage: 5,
     loading: false,
-    error: null
+    error: null,
+    minProductPrice: null,
+    maxProductPrice: null,
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -41,6 +43,16 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentPage: action.payload,
+            };
+        case productsActionTypes.PRODUCTS_SET_MIN_PRICE:
+            return {
+                ...state,
+                minProductPrice: action.payload,
+            };
+        case productsActionTypes.PRODUCTS_SET_MAX_PRICE:
+            return {
+                ...state,
+                maxProductPrice: action.payload,
             };
         default:
             return state;

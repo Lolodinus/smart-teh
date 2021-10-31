@@ -15,12 +15,23 @@ export const SearchAlgolia = () => {
     const { products, totalPages, currentPage, productsOnPage, loading, error } = useSelector((store) => store.products);
 
     // search filter
-    const { searchQuery } = useSelector((store) => store.filter);
-    const { filterBy } = useSelector((store) => store.filter);
+    const { searchQuery, filterBy, minPrice, maxPrice } = useSelector((store) => store.filter);
 
     useEffect(() => {
-        dispatch(productsActions.fetchProducts(searchQuery, productsOnPage, currentPage, filterBy));
-    }, [dispatch, currentPage, searchQuery, productsOnPage, filterBy]);
+        const filters = {minPrice, maxPrice};
+        dispatch(productsActions.fetchProducts(searchQuery, productsOnPage, currentPage, filterBy, filters));
+    }, [dispatch, currentPage, searchQuery, productsOnPage, filterBy, minPrice, maxPrice]);
+
+    useEffect(() => {
+        if (products && products.length > 0) {
+            const newProducts = products.slice();
+            dispatch(productsActions.productsSetMinPrice(newProducts.sort((a,b) => a.price > b.price)[0].price));
+            dispatch(productsActions.productsSetMaxPrice(newProducts.sort((a,b) => a.price < b.price)[0].price));
+        } else {
+            dispatch(productsActions.productsSetMinPrice(0));
+            dispatch(productsActions.productsSetMaxPrice(0));
+        }
+    }, [dispatch, products, searchQuery])
 
     const renderProduct = () => {
         return products && products.length > 0
