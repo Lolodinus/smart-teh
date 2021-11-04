@@ -9,7 +9,7 @@ import style from "./sidebarFilter.module.scss";
 export const SidebarFilter = () => {
     const dispatch = useDispatch();
     
-    const { minProductPrice, maxProductPrice } = useSelector((store) => store.products);
+    const { products, minProductPrice, maxProductPrice } = useSelector((store) => store.products);
     // search filter
     const { minPrice, maxPrice } = useSelector((store) => store.filter);
 
@@ -131,6 +131,13 @@ export const SidebarFilter = () => {
                         value={ maxPriceValue }
                     />
                 </div>
+            </div>
+            <div>
+                <h2 className={style["sidebar-filter__title"]}>
+                    Категория
+                </h2>
+                <ul>
+                </ul>
             </div>
         </section>
     )

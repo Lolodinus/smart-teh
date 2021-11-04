@@ -9,6 +9,7 @@ const initialState = {
     error: null,
     minProductPrice: null,
     maxProductPrice: null,
+    category: []
 }
 
 export const productsReducer = (state = initialState, action) => {

@@ -1,4 +1,4 @@
-import { searchOnlyClient } from "../config/algolia";
+import { searchOnlyClient, indexAlgolia } from "../config/algolia";
 
 const _transformData = (data) => {
     const newData = {
@@ -86,4 +86,20 @@ export const getAlgoliaSearchData = async (searchText, itemsOnPage, currentPage,
     const searchIndex = await searchOnlyClient.initIndex(newIndexName);
     const algoliaSearchData = await searchIndex.search(searchText, algoliaSearchConfig);
     return _transformData(algoliaSearchData);
+}
+
+
+// add product
+export const addProductToAlgoliaDB = async(id, title, price, img, category) => {
+    try {
+        await indexAlgolia.saveObject({
+            objectID: id,
+            title: title,
+            price: +price,
+            img: img,
+            category: category,
+        });
+    } catch(error) {
+        console.log(`${error.code} - ${error.message}`);
+    }
 }

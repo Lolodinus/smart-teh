@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { collection, addDoc, doc, getDoc} from "firebase/firestore";
 
+import { CustomSelect } from "../../components/customSelect";
 import { database } from "../../config/firebase";
 import { indexAlgolia } from "../../config/algolia";
+import { getProductCategory, addProductToFirebaseDB, addProductToAlgoliaDB } from "../../utils";
 
 import style from "./addProduct.module.scss";
 
@@ -18,6 +20,7 @@ export const AddProduct = () => {
             specificationValue: ""
         },
     ]);
+    const [allCategory, setAllCategory] = useState("");
 
     const resetForm = () => {
         setTitle("");
@@ -29,30 +32,28 @@ export const AddProduct = () => {
                 specification: "",
                 specificationValue: ""
             },
-        ])
+        ]);
     }
 
     const onSubmitHandler = async(e) => {
         e.preventDefault();
-        const docRef = await addDoc(collection(database, "product"), {
+        const productId = await addProductToFirebaseDB(
             title,
-            "price": +price,
+            price,
             img,
             category,
-            detail
-        });
-        
-        await indexAlgolia.saveObject({
-            objectID: docRef.id,
-            title,
-            price: +price,
-            img,
-            category
-        }).then(() => {
-            resetForm();
-        }).catch(error => {
-            console.log(error)
-        });
+            detail,
+        );
+        if (productId) {
+            await addProductToAlgoliaDB(
+                productId,
+                title,
+                price,
+                img,
+                category,
+            );
+            await resetForm();
+        }
     }
     
     const handleChangeDetailField = (index, event) => {
@@ -78,11 +79,21 @@ export const AddProduct = () => {
     }
 
     const deleteDetailField = (index) => {
+        if (detail.length === 1 && index === 0) {
+            return
+        }
         setDetail([
             ...detail.slice(0, index),
             ...detail.slice(index + 1)
         ])
     }
+
+    // get category from firebase db
+    useEffect(() => {
+        getProductCategory().then((category) => {
+            setAllCategory(category);
+        })
+    }, [])
 
     const detailFields = detail.map((specification, index) => {
         return (
@@ -153,13 +164,11 @@ export const AddProduct = () => {
                     />
                 </div>
                 <div className={ style["add-product__field"] }>
-                    <input 
-                        type="text"
-                        name="category"
-                        placeholder="Введите категорию"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className={ style["add-product__input"] }
+                    <CustomSelect 
+                        options={ allCategory }
+                        defaulSelectValue={"Выбрать категорию"}
+                        setOption={ setCategory }
+                        selectedOption={ category }
                     />
                 </div>
                 <hr/>

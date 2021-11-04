@@ -27,5 +27,8 @@ export const productsActions = {
         } catch(error) {
             dispatch(productsActions.productsFail(error.message));
         } 
+    },
+    fetchProductsCategory: () => async (dispatch) => {
+        
     }
 }
