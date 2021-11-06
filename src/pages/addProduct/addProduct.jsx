@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { collection, addDoc, doc, getDoc} from "firebase/firestore";
 
 import { CustomSelect } from "../../components/customSelect";
-import { database } from "../../config/firebase";
-import { indexAlgolia } from "../../config/algolia";
-import { getProductCategory, addProductToFirebaseDB, addProductToAlgoliaDB } from "../../utils";
+import { getProductCategoryFromFirestoreDB, addProductToFirebaseDB, addProductToAlgoliaDB } from "../../utils";
 
 import style from "./addProduct.module.scss";
 
@@ -50,7 +47,7 @@ export const AddProduct = () => {
                 title,
                 price,
                 img,
-                category,
+                category.title,
             );
             await resetForm();
         }
@@ -90,7 +87,7 @@ export const AddProduct = () => {
 
     // get category from firebase db
     useEffect(() => {
-        getProductCategory().then((category) => {
+        getProductCategoryFromFirestoreDB().then((category) => {
             setAllCategory(category);
         })
     }, [])

@@ -57,7 +57,7 @@ export const getCountProductByCategory = (category) => {
     return countCategory;
 }
 
-export const getProductCategory = async () => {
+export const getProductCategoryFromFirestoreDB = async () => {
     const docRef = collection(database, "category");
     const querySnapshot = await getDocs(docRef);
 

@@ -31,12 +31,18 @@ export const productsReducer = (state = initialState, action) => {
                 products: action.payload.products,
                 currentPage: chackCurrentPage,
                 totalPages: action.payload.totalPages,
+                minProductPrice: action.payload.minPrice,
+                maxProductPrice: action.payload.maxPrice,
+                category: action.payload.availableCatygory,
                 loading: false
             };
         case productsActionTypes.PRODUCTS_FAIL:
             return {
                 ...state,
                 currentPage: 1,
+                minProductPrice: null,
+                maxProductPrice: null,
+                category: [],
                 loading: false,
                 error: action.payload
             };

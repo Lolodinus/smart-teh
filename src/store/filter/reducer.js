@@ -5,6 +5,7 @@ const initialState = {
     filterBy: "all",
     minPrice: "",
     maxPrice: "",
+    categoryTags: [],
 }
 
 export const filterReducer = (state = initialState, action) => {
@@ -26,6 +27,7 @@ export const filterReducer = (state = initialState, action) => {
                 filterBy: "all",
                 minPrice: "",
                 maxPrice: "",
+                categoryTags: [],
             };
         case filterActionTypes.SET_MIN_PRICE:
             return {
@@ -36,6 +38,11 @@ export const filterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 maxPrice: action.payload,
+            };
+        case filterActionTypes.SET_CATEGORY_TAGS:
+            return {
+                ...state,
+                categoryTags: action.payload || [],
             };
         default:
             return state;

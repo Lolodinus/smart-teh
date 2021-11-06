@@ -11,19 +11,17 @@ export const productsActionTypes = {
 
 export const productsActions = {
     productsRequest: () => ({type: productsActionTypes.PRODUCTS_REQUEST}),
-    productsSuccess: (products, totalPages) => ({type: productsActionTypes.PRODUCTS_SUCCESS, payload: {products, totalPages}}),
+    productsSuccess: (payload) => ({type: productsActionTypes.PRODUCTS_SUCCESS, payload}),
     productsFail: (error) => ({type: productsActionTypes.PRODUCTS_FAIL, payload: error}),
     productsSetCurrentPage: (page) => ({type: productsActionTypes.PRODUCTS_SET_CURRENT_PAGE, payload: page}),
     productsSetMinPrice: (payload) => ({type: productsActionTypes.PRODUCTS_SET_MIN_PRICE, payload}),
     productsSetMaxPrice: (payload) => ({type: productsActionTypes.PRODUCTS_SET_MAX_PRICE, payload}),
 
-    fetchProducts: (searchText, itemsOnPage, currentPage, sorting, filter) => async (dispatch) => {
+    fetchProducts: (itemsOnPage, currentPage, allFilters) => async (dispatch) => {
         try {
             dispatch(productsActions.productsRequest());
-            const algoliaData = await getAlgoliaSearchData(searchText, itemsOnPage, currentPage, sorting, filter);
-            const products = algoliaData.hits;
-            const totalPages = +algoliaData.nbPages;
-            dispatch(productsActions.productsSuccess(products, totalPages));
+            const {minPrice, maxPrice, availableCatygory, products, totalPages} = await getAlgoliaSearchData(itemsOnPage, currentPage, allFilters);
+            dispatch(productsActions.productsSuccess({minPrice, maxPrice, availableCatygory, products, totalPages}));
         } catch(error) {
             dispatch(productsActions.productsFail(error.message));
         } 

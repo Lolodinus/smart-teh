@@ -5,12 +5,12 @@
     margin-top: 15px;
     margin-right: 15px;
     border-radius: 15px;
-    padding: 5px 15px;
+    padding: 10px 15px;
     background-color: rgba($primary-color-text, .5);
     align-self: start;
     flex-shrink: 0;
     .sidebar-filter__price {
-        margin: 10px 0;
+        padding: 5px 0;
     }
 }
 
@@ -49,6 +49,30 @@
         color: $primary-color;
         &::placeholder {
             color: $primary-color;
+        }
+    }
+}
+
+.category {
+    padding: 5px 0;
+    .category__title {
+        text-align: left;
+        font-size: 20px;
+        font-weight: 700;
+        color: $primary-color-dark;
+    }
+    .category__list {
+        margin-top: 10px;
+        .category__item {
+            height: 24px;
+            display: flex;
+            align-items: center;
+
+            .category__label {
+                font-size: 16px;
+                font-weight: 600;
+                color: $primary-color;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ export const filterActionTypes = {
     RESET_FILTER: "FILTER.RESET_FILTER",
     SET_MIN_PRICE: "FILTER.SET_MIN_PRICE",
     SET_MAX_PRICE: "FILTER.SET_MAX_PRICE",
+    SET_CATEGORY_TAGS: "FILTER.SET_CATEGORY_TAGS",
 }
 
 export const filterActions = {
@@ -12,4 +13,5 @@ export const filterActions = {
     resetFilter: () => ({type: filterActionTypes.RESET_FILTER}),
     setMinPrice: (payload) => ({type: filterActionTypes.SET_MIN_PRICE, payload}),
     setMaxPrice: (payload) => ({type: filterActionTypes.SET_MAX_PRICE, payload}),
+    setCategoryTags: (tags) => ({type: filterActionTypes.SET_CATEGORY_TAGS, payload: tags}),
 }

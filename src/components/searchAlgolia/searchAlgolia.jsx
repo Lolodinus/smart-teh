@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ProductCard } from "../../components/productCard";
@@ -14,24 +14,75 @@ export const SearchAlgolia = () => {
 
     const { products, totalPages, currentPage, productsOnPage, loading, error } = useSelector((store) => store.products);
 
-    // search filter
-    const { searchQuery, filterBy, minPrice, maxPrice } = useSelector((store) => store.filter);
+    // filter
+    const { searchQuery, filterBy, minPrice, maxPrice, categoryTags } = useSelector((store) => store.filter);
+    const [allFilters, setAllFilter] = useState([]);
 
     useEffect(() => {
-        const filters = {minPrice, maxPrice};
-        dispatch(productsActions.fetchProducts(searchQuery, productsOnPage, currentPage, filterBy, filters));
-    }, [dispatch, currentPage, searchQuery, productsOnPage, filterBy, minPrice, maxPrice]);
+        let newFilter = {
+            sortByFilter: "",
+            searchFilter: "",
+            priceFilter: {},
+            categoryTagsFilter: [],
+        };
 
-    useEffect(() => {
-        if (products && products.length > 0) {
-            const newProducts = products.slice();
-            dispatch(productsActions.productsSetMinPrice(newProducts.sort((a,b) => a.price > b.price)[0].price));
-            dispatch(productsActions.productsSetMaxPrice(newProducts.sort((a,b) => a.price < b.price)[0].price));
-        } else {
-            dispatch(productsActions.productsSetMinPrice(0));
-            dispatch(productsActions.productsSetMaxPrice(0));
+        // sort by filter
+        newFilter ={
+            ...newFilter,
+            sortByFilter: filterBy,
+        };
+
+        // search filter
+        newFilter ={
+            ...newFilter,
+            searchFilter: searchQuery,
+        };
+        
+        // price filter
+        if (minPrice || maxPrice) {
+            if (minPrice && maxPrice) {
+                newFilter ={
+                    ...newFilter,
+                    priceFilter: {
+                        minPrice,
+                        maxPrice,
+                    },
+                };
+            } else if (minPrice) {
+                newFilter ={
+                    ...newFilter,
+                    priceFilter: {
+                        minPrice,
+                    },
+                };
+            } else {
+                newFilter ={
+                    ...newFilter,
+                    priceFilter: {
+                        maxPrice,
+                    },
+                };
+            };
+        };
+        
+        // category tags filter
+        if (categoryTags && categoryTags.length > 0) {
+            newFilter ={
+                ...newFilter,
+                categoryTagsFilter: categoryTags.map(tag => tag.title),
+            };
         }
-    }, [dispatch, products, searchQuery])
+
+        setAllFilter(newFilter);
+    }, [filterBy, searchQuery, minPrice, maxPrice, categoryTags])
+
+    useEffect(() => {
+        dispatch(productsActions.fetchProducts(
+            productsOnPage, 
+            currentPage,
+            allFilters,
+        ));
+    }, [dispatch, currentPage, productsOnPage, minPrice, maxPrice, allFilters]);
 
     const renderProduct = () => {
         return products && products.length > 0

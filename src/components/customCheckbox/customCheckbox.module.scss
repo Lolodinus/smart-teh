@@ -1,0 +1,42 @@
+@import "../../style/color.scss";
+
+.checkbox {
+    .checkbox__label {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 600;
+        color: $primary-color;
+        .checkbox__input {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+        .checkbox__fake {
+            display: block;
+            height: 16px;
+            width: 16px;
+            border: 2px solid $primary-color;
+            border-radius: 25%;
+            margin-right: 5px;
+            &._active {
+                background-color: $primary-color;
+                position: relative;
+                &::after {
+                    content: "";
+                    width: 70%;
+                    height: 70%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: center / contain no-repeat url("./icon/checkmark.svg");
+                }
+            }
+        }
+    }
+}

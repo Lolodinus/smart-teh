@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
+import { CustomCheckbox } from "../customCheckbox";
 import { filterActions } from "../../store/filter"
+import { getProductCategoryFromFirestoreDB } from "../../utils";
 
 import style from "./sidebarFilter.module.scss";
 
 export const SidebarFilter = () => {
     const dispatch = useDispatch();
     
-    const { products, minProductPrice, maxProductPrice } = useSelector((store) => store.products);
+    const { minProductPrice, maxProductPrice, category } = useSelector((store) => store.products);
     // search filter
-    const { minPrice, maxPrice } = useSelector((store) => store.filter);
+    const { minPrice, maxPrice, categoryTags: filterCategoryTags } = useSelector((store) => store.filter);
 
+    // price filter
     const [minPriceValue, setMinPrice] = useState("");
     const [maxPriceValue, setMaxPrice] = useState("");
 
@@ -104,6 +106,90 @@ export const SidebarFilter = () => {
         setMaxPrice(maxPrice);
     }, [minPrice, maxPrice])
 
+    // category filter 
+    const [categoryTags, setCategoryTags] = useState("");
+
+    useEffect(() => {
+        if (filterCategoryTags.length === 0) {
+            setCategoryTags("");
+        }
+    }, [filterCategoryTags])
+
+    useEffect(() => {
+        if (!categoryTags) {
+            getProductCategoryFromFirestoreDB()
+                .then((data) => {
+                    setCategoryTags(data.map(tag => {
+                        return {
+                            id:  tag.id,
+                            title: tag.title,
+                            tagName: tag.value,
+                            count: tag.count,
+                            isChecked: false
+                        }
+                    }));
+                }).catch(error => {
+                    console.log(`${error.code} - ${error.message}`);
+                })
+        }
+    }, [categoryTags]);
+
+    useEffect(() => {
+        if (category && Object.keys(category).length > 0 && categoryTags && categoryTags.length > 0) {
+            setCategoryTags(
+                categoryTags.map( tag => {
+                    return {
+                        ...tag,
+                        count: category[tag.title] || 0,
+                    }
+                })
+            );
+        }
+    }, [category]);
+
+    const checkChangeFilterTag = async(newTagFilter, filterCategoryTags) => {
+        let res = false;
+        if (newTagFilter.length !== filterCategoryTags.length) {
+            res = true
+        } else {
+            for(let i = 0; i < newTagFilter.length; i++) {
+                if (newTagFilter[i].id !== filterCategoryTags[i].id) {
+                    return res = true
+                }
+            }
+        };
+        if (res) {
+            dispatch(filterActions.setCategoryTags(newTagFilter));
+        }
+    }
+
+    useEffect(() => {
+        if (categoryTags && categoryTags.length > 0) {
+            const newTagFilter = categoryTags.filter(tag => {
+                if (tag.isChecked === true) {
+                    return true;
+                }
+                return false;
+            });
+            checkChangeFilterTag(newTagFilter, filterCategoryTags);
+        }
+    }, [dispatch, categoryTags])
+
+    const checkCategoryTagsHandler = async (tagName) => {
+        await setCategoryTags(items =>
+            items.map(item => {
+                if (item.tagName === tagName) {
+                    return {
+                        ...item,
+                        isChecked: !item.isChecked,
+                    }
+                } else {
+                    return item
+                }
+            })
+        );
+    }
+
     return (
         <section className={style["sidebar-filter"]}>
             <div className={style["sidebar-filter__price"]}>
@@ -132,11 +218,24 @@ export const SidebarFilter = () => {
                     />
                 </div>
             </div>
-            <div>
-                <h2 className={style["sidebar-filter__title"]}>
+            <div className={style["category"]}>
+                <h2 className={style["category__title"]}>
                     Категория
                 </h2>
-                <ul>
+                <ul className={style["category__list"]}>
+                    { categoryTags && categoryTags.length > 0
+                        ?  categoryTags.map(tag => {
+                            if (tag.count < 1) {
+                                return "";
+                            }
+                            return (
+                                <li className={style["category__item"]} key={ tag.id }>
+                                    <CustomCheckbox isChecked={tag.isChecked} onChange={() => checkCategoryTagsHandler(tag.tagName)} label={`${tag.tagName} (${tag.count})`}/>
+                                </li>
+                            );
+                        })
+                        : null
+                    }
                 </ul>
             </div>
         </section>
