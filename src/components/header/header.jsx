@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { pageLinks} from "../../constant";
 import { filterActions } from "../../store/filter";
+import { productsActions } from "../../store/products";
 import { SearchFilter } from "../searchFilter/searchFilter";
 
 import style from "./header.module.scss"
@@ -12,8 +13,9 @@ export const Header = () => {
     const { totalQuantity } = useSelector((store) => store.cart);
     const { isLoginIn } = useSelector((store) => store.auth);
 
-    const refreshPage = () => {
-        dispatch(filterActions.resetFilter());
+    const refreshPage = async () => {
+        await dispatch(filterActions.resetFilter());
+        await dispatch(productsActions.productsSetCurrentPage(1));
     }
 
     const productInCartExist = totalQuantity ? style.active : "";

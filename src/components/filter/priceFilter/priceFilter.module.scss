@@ -1,0 +1,33 @@
+@import "../../../style/color.scss";
+
+.price-filter {
+    margin-top: 10px;
+    display: flex;
+    span {
+        width: 15px;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 2px;
+            background-color: $primary-color;
+        }
+    }
+    .price-filter__input {
+        width: 50%;
+        height: 40px;
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        padding: 0 10px;
+        font-size: 16px;
+        font-weight: 500;
+        color: $primary-color;
+        &::placeholder {
+            color: $primary-color;
+        }
+    }
+}

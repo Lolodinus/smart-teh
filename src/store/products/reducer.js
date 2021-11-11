@@ -20,6 +20,9 @@ export const productsReducer = (state = initialState, action) => {
                 products: [],
                 totalProduct: 0,
                 loading: true,
+                minProductPrice: null,
+                maxProductPrice: null,
+                category: [],
                 error: null
             };
         case productsActionTypes.PRODUCTS_SUCCESS:

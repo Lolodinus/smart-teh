@@ -87,7 +87,7 @@ const _getCategoryTags = async (searchIndex, searchFilter, algoliaSearchConfig, 
         ...algoliaSearchConfig,
         filters: algoliaPriceFilter,
     });
-    return serchDataWithoutTags.facets.category;
+    return serchDataWithoutTags.facets ? serchDataWithoutTags.facets.category : "";
 }
 
 // get product
@@ -107,16 +107,16 @@ export const getAlgoliaSearchData = async (itemsOnPage, currentPage, allFilters)
     const newIndexName = await _getSortingFilter(sortByFilter);
 
     // check filter
-    const {algoliaConfig, algoliaPriceFilter, algoliaCatygoryFilter} = await _checkFilter(algoliaSearchConfig, allFilters);
+    const {algoliaConfig, algoliaPriceFilter} = await _checkFilter(algoliaSearchConfig, allFilters);
     algoliaSearchConfig = algoliaConfig;
 
+    // console.log(algoliaSearchConfig);
     const searchIndex = await searchOnlyClient.initIndex(newIndexName);
     const algoliaSearchData = await searchIndex.search(searchFilter, algoliaSearchConfig);
     const algoliaData = await _transformData(algoliaSearchData);
-
     return {
-        minPrice: algoliaSearchData.facets_stats.price.min,
-        maxPrice: algoliaSearchData.facets_stats.price.max,
+        minPrice: algoliaSearchData.facets_stats ? algoliaSearchData.facets_stats.price.min : "",
+        maxPrice: algoliaSearchData.facets_stats ? algoliaSearchData.facets_stats.price.max : "",
         availableCatygory: await _getCategoryTags(
             searchIndex, 
             searchFilter, 
