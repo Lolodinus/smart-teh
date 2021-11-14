@@ -6,4 +6,8 @@ export const authentificationActionTypes = {
 export const authentificationActions = {
     setUser: (payload) => ({ type: authentificationActionTypes.SET_USER, payload }),
     resetUser: () => ({ type: authentificationActionTypes.RESET_USER }),
+
+    login: (payload) => async (dispatch) => {
+        await dispatch(authentificationActions.setUser(payload));
+    },
 }

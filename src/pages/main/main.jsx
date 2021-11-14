@@ -7,7 +7,8 @@ import { SidebarFilter } from "../../components/sidebarFilter";
 import style from "./main.module.scss";
 
 
-export const Main = () => {    
+export const Main = () => {
+
     return (
         <section className={ style.main }>
             <SortingOnTop/>
