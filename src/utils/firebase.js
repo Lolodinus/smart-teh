@@ -108,3 +108,19 @@ export const addProductToFirebaseDB = async (title, price, img, category, detail
         console.log(`${error.code} - ${error.message}`);
     }
 }
+
+
+// add user to database
+export const updateDocToFirebaseDB = async(DBTable, docId, newData) => {
+    const docRef = await doc(database, DBTable, docId);
+    
+    await updateDoc(docRef, {
+        ...newData,
+    });
+
+    // const userRef = doc(database, "users", user.uid);
+
+    // await updateDoc(userRef, {
+    //     authAt: new Date(),
+    //   });
+}

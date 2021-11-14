@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
 
-import { auth, database } from "../../config/firebase";
 import { authentificationActions } from "../../store/authentication";
 import { pageLinks } from "../../constant/";
 import { useInput, useFirebaseErrorHandler } from "../../components/formValidation";
+import { loginWithFirebase } from "../../utils"
 
 import style from "./login.module.scss";
 
@@ -29,34 +27,21 @@ export const Login = () => {
     const [errorForm, setErrorForm] = useState("");
     const errorFirebase = useFirebaseErrorHandler (errorForm);
 
-    
     const handleSubmit = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email.value, password.value)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-
-                // add data to redux
-                const data = {
-                    user: user.providerData[0],
-                    id: user.uid
-                };
-
-                dispatch(authentificationActions.setUser(data));
+        try {
+            loginWithFirebase(
+                email.value, 
+                password.value, 
+                dispatch, 
+                authentificationActions.login, 
+                setErrorForm
+            ).then(() => {
                 history.push(pageLinks.main);
-                return user
-            })
-            .then(async (user) => {
-                const userRef = doc(database, "users", user.uid);
-
-                await updateDoc(userRef, {
-                    authAt: new Date(),
-                  });
-            })
-            .catch((error) => {
-                setErrorForm(error.code);
-            });
+            }).catch(error => console.log(`${error.code} - ${error.value}`));
+        } catch(error) {
+            console.log(`${error.code} - ${error.value}`);
+        }
     }
 
     return (
